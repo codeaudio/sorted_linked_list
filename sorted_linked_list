@@ -23,7 +23,7 @@ class SortedLinkedList:
                     self.head = new_node
 
     @staticmethod
-    def all_node(head, headsaeve, i='', z=1):
+    def all_node(head, i='', z=1):
         if head.right is not None:
             if i == 'right':
                 z += 1
@@ -41,9 +41,9 @@ class SortedLinkedList:
         else:
             print(head.value)
         if head.right is not None:
-            SortedLinkedList.all_node(head.right, headsaeve, 'right', z)
+            SortedLinkedList.all_node(head.right, 'right', z)
         elif head.left is not None:
-            SortedLinkedList.all_node(head.left, headsaeve, 'left', z)
+            SortedLinkedList.all_node(head.left, 'left', z)
 
 
 if __name__ == '__main__':
@@ -57,4 +57,4 @@ if __name__ == '__main__':
     sortedll.add(5)
     sortedll.add(4)
     sortedll.add(3)
-    SortedLinkedList.all_node(sortedll.head, sortedll.head)
+    SortedLinkedList.all_node(sortedll.head)
