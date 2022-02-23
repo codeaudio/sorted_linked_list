@@ -1,0 +1,64 @@
+class Node:
+    def __init__(self, value, left=None, right=None):
+        self.left = left
+        self.right = right
+        self.value = value
+
+
+class SortedLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def add(self, element):
+        if self.head is None:
+            self.head = Node(element)
+        else:
+            if (self.head.right and self.head.left) is None:
+
+                new_node = Node(element)
+
+                if element < self.head.value:
+                    new_node.right = self.head
+                    self.head = new_node
+                elif element > self.head.value:
+                    new_node.left = self.head
+                    self.head = new_node
+
+    @staticmethod
+    def all_node(head, headsaeve, i='', z=1):
+        if head.right is not None:
+            if i == 'right':
+                z += 1
+                print(z * '  ' + str(head.value))
+            else:
+                z -= 1
+                print(str(head.value) + '  ' * z)
+
+        elif head.left is not None:
+            if i == 'left':
+                z -= 1
+                print(str(head.value) + '  ')
+            else:
+                z += 1
+                print(z * '  ' + str(head.value))
+
+        else:
+            print(head.value)
+        if head.right is not None:
+            SortedLinkedList.all_node(head.right, headsaeve, 'right', z)
+        elif head.left is not None:
+            SortedLinkedList.all_node(head.left, headsaeve, 'left', z)
+
+
+if __name__ == '__main__':
+    sortedll = SortedLinkedList()
+    sortedll.add(10)
+    sortedll.add(11)
+    sortedll.add(9)
+    sortedll.add(2)
+    sortedll.add(100)
+    sortedll.add(-3)
+    sortedll.add(5)
+    sortedll.add(4)
+    sortedll.add(3)
+    SortedLinkedList.all_node(sortedll.head, sortedll.head)
