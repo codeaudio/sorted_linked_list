@@ -3,6 +3,8 @@ class Node:
         self.left = left
         self.right = right
         self.value = value
+        self.center = None
+        self.prev = None
 
 
 class SortedLinkedList:
@@ -18,32 +20,51 @@ class SortedLinkedList:
                 if element < self.head.value:
                     new_node.right = self.head
                     self.head = new_node
+                    new_node.right.prev = self.head
                 elif element > self.head.value:
                     new_node.left = self.head
                     self.head = new_node
+                    new_node.left.prev = self.head
+                else:
+                    new_node.center = self.head
+                    self.head = new_node
+                    new_node.center.prev = self.head
 
     @staticmethod
-    def all_node(head, position='', position_multiplier=1):
-        if head.right is not None:
+    def all_node(head, position='', position_multiplier=15):
+        if position == 'center':
+            print(position_multiplier * '  ' + str(head.value) + '  ' * position_multiplier)
+        elif head.right is not None:
             if position == 'right':
                 position_multiplier += 1
                 print(position_multiplier * '  ' + str(head.value))
             else:
                 position_multiplier -= 1
-                print(str(head.value) + '  ' * position_multiplier)
+                print(position_multiplier * '  ' + str(head.value) + '  ' * position_multiplier)
         elif head.left is not None:
             if position == 'left':
                 position_multiplier -= 1
-                print(str(head.value) + '  ')
+                print(position_multiplier * '  ' + str(head.value) + '  ' * position_multiplier)
             else:
                 position_multiplier += 1
                 print(position_multiplier * '  ' + str(head.value))
         else:
-            print(head.value)
+            if head.prev and head.prev.value > head.value:
+                print((position_multiplier - 1) * '  ' + str(head.value) + '  ' * position_multiplier)
+            elif head.prev and head.prev.value < head.value:
+                print((position_multiplier + 1) * '  ' + str(head.value) + '  ' * position_multiplier)
+            else:
+                print(position_multiplier * '  ' + str(head.value) + '  ' * position_multiplier)
         if head.right is not None:
             SortedLinkedList.all_node(head.right, 'right', position_multiplier)
         elif head.left is not None:
             SortedLinkedList.all_node(head.left, 'left', position_multiplier)
+        elif head.center:
+            if position == 'left':
+                position_multiplier -= 1
+            elif position == 'right':
+                position_multiplier += 1
+            SortedLinkedList.all_node(head.center, 'center', position_multiplier)
 
 
 if __name__ == '__main__':
@@ -51,10 +72,16 @@ if __name__ == '__main__':
     sortedll.add(10)
     sortedll.add(11)
     sortedll.add(9)
+    sortedll.add(1)
     sortedll.add(2)
     sortedll.add(100)
+    sortedll.add(101)
+    sortedll.add(103)
+    sortedll.add(103)
+    sortedll.add(-3)
     sortedll.add(-3)
     sortedll.add(5)
     sortedll.add(4)
+    sortedll.add(3)
     sortedll.add(3)
     SortedLinkedList.all_node(sortedll.head)
