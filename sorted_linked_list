@@ -23,27 +23,27 @@ class SortedLinkedList:
                     self.head = new_node
 
     @staticmethod
-    def all_node(head, i='', z=1):
+    def all_node(head, position='', position_multiplier=1):
         if head.right is not None:
-            if i == 'right':
-                z += 1
-                print(z * '  ' + str(head.value))
+            if position == 'right':
+                position_multiplier += 1
+                print(position_multiplier * '  ' + str(head.value))
             else:
-                z -= 1
-                print(str(head.value) + '  ' * z)
+                position_multiplier -= 1
+                print(str(head.value) + '  ' * position_multiplier)
         elif head.left is not None:
-            if i == 'left':
-                z -= 1
+            if position == 'left':
+                position_multiplier -= 1
                 print(str(head.value) + '  ')
             else:
-                z += 1
-                print(z * '  ' + str(head.value))
+                position_multiplier += 1
+                print(position_multiplier * '  ' + str(head.value))
         else:
             print(head.value)
         if head.right is not None:
-            SortedLinkedList.all_node(head.right, 'right', z)
+            SortedLinkedList.all_node(head.right, 'right', position_multiplier)
         elif head.left is not None:
-            SortedLinkedList.all_node(head.left, 'left', z)
+            SortedLinkedList.all_node(head.left, 'left', position_multiplier)
 
 
 if __name__ == '__main__':
