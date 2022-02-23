@@ -14,9 +14,7 @@ class SortedLinkedList:
             self.head = Node(element)
         else:
             if (self.head.right and self.head.left) is None:
-
                 new_node = Node(element)
-
                 if element < self.head.value:
                     new_node.right = self.head
                     self.head = new_node
@@ -33,7 +31,6 @@ class SortedLinkedList:
             else:
                 z -= 1
                 print(str(head.value) + '  ' * z)
-
         elif head.left is not None:
             if i == 'left':
                 z -= 1
@@ -41,7 +38,6 @@ class SortedLinkedList:
             else:
                 z += 1
                 print(z * '  ' + str(head.value))
-
         else:
             print(head.value)
         if head.right is not None:
